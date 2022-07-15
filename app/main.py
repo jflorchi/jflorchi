@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 
 from fastapi import APIRouter
 from app.api.v1 import articles
+from app.api.v1 import home
 
 def get_application():
     _app = FastAPI(title=settings.PROJECT_NAME)
@@ -21,6 +23,8 @@ def get_application():
 
 api_router = APIRouter()
 api_router.include_router(articles.router, tags=["articles"])
+api_router.include_router(home.router, tags=["home", "index"])
 
 app = get_application()
 app.include_router(api_router)
+app.mount("/", StaticFiles(directory="/home/jflorchi/dev/jflorchi.ca/app/static",html = True), name="static")
