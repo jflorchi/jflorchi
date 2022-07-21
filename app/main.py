@@ -6,7 +6,9 @@ from app.core.config import settings
 
 from fastapi import APIRouter
 from app.api.v1 import articles
-from app.api.v1 import home
+from app.api.v1 import about
+from app.api import home
+
 
 def get_application():
     _app = FastAPI(title=settings.PROJECT_NAME)
@@ -22,7 +24,9 @@ def get_application():
     return _app
 
 api_router = APIRouter()
-api_router.include_router(articles.router, tags=["articles"])
+api_router.include_router(articles.router, prefix="/api/v1", tags=["articles"])
+api_router.include_router(about.router, prefix="/api/v1", tags=["about"])
+
 api_router.include_router(home.router, tags=["home", "index"])
 
 app = get_application()
