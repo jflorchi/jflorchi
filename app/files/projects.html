@@ -20,23 +20,9 @@
       </ul>
     </div>
   <div id="content"></div>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    document.getElementById('content').innerHTML =
-    marked.parse('# Marked in the browser\n\nRendered by **marked**.');
-  </script>
-  <script>
-    const userAction = async () => {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/about');
-      const myJson = await response.json(); //extract JSON from the http response
-      const para = document.createElement("p");
-      para.appendChild(document.createTextNode(myJson.body));
-      
-      const element = document.getElementById("content");
-      element.appendChild(para);
-    }
-
-    userAction();
-  </script>
+    <div class="project-listing">
+      <h3 class="project-title">project title</h3>
+      <p class="project-description">pppproject description roject description roject description roject description </p>
+    </div>
   </body>
 </html>

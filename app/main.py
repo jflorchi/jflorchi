@@ -31,4 +31,5 @@ api_router.include_router(home.router, tags=["home", "index"])
 
 app = get_application()
 app.include_router(api_router)
-app.mount("/", StaticFiles(directory="/home/jflorchi/dev/jflorchi.ca/app/static",html = True), name="static")
+app.mount("/", StaticFiles(directory="/home/jflorchi/dev/jflorchi.ca/app/static", html=True), name="static")
+app.mount("/assets", StaticFiles(directory="/home/jflorchi/dev/jflorchi.ca/app/assets", html=False), name="assets")

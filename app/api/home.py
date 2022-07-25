@@ -13,4 +13,6 @@ async def read_articles():
 async def read_about():
     return FileResponse("app/files/about.html")
 
-
+@router.get("/projects", tags=["projects"])
+async def read_about():
+    return FileResponse("app/files/projects.html")
