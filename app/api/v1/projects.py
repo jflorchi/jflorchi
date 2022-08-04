@@ -28,6 +28,23 @@ async def read_projects_meta(db: Session = Depends(get_db)):
         resp.append(tmp)
     return resp
 
+@router.get("/projects/recent", tags=["projects", "recent"])
+async def read_projects_meta(db: Session = Depends(get_db)):
+    projects = db.query(models.Projects).order_by(models.Projects.start_date.desc()).all()
+    resp = []
+    count = 0
+    for prj in projects:
+        tmp = {
+            "id": prj.id,
+            "title": prj.title,
+            "summary": prj.summary,
+            "created_at": prj.created_at
+        }
+        resp.append(tmp)
+        count += 1
+        if count == 3:
+            break
+    return resp
 
 @router.get("/projects/{id}", response_model=schemas.Project, tags=["projects"])
 async def read_project(id: int, db: Session = Depends(get_db)):
