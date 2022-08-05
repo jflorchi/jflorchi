@@ -7,6 +7,28 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>Jordan Florchinger</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      (async () => {
+        const response = await fetch('/api/v1/projects/recent');
+        const resp = await response.json();
+        const projectContainer = document.getElementById("home-right-column");
+        for (var i in resp) {
+          const element = resp[i];
+          const header = document.createElement("h3");
+          const paragraph = document.createElement("p");
+
+          const div = document.createElement("div");
+          div.classList.add("project-row");
+          div.appendChild(header);
+          div.appendChild(paragraph);
+
+          header.appendChild(document.createTextNode(element.title));
+          paragraph.appendChild(document.createTextNode(element.summary));
+
+          projectContainer.appendChild(div);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="centered">
@@ -48,20 +70,8 @@
           </div>
         </div>
       </div>
-      <div class="cloumn" id="home-right-colun">
+      <div id="home-right-column">
         <h2>recent projects</h2>
-        <div class="project-row" id="project-1-div">
-          <h3>project one</h3>
-          <p>Pellentesque sagittis enim ut massa venenatis, vitae lobortis sapien posuere. Vestibulum ipsum turpis, dignissim at semper sit amet, pellentesque non felis.</p>
-        </div>
-        <div class="project-row" id="project-2-div">
-          <h3>project two</h3>
-          <p>Pellentesque sagittis enim ut massa venenatis, vitae lobortis sapien posuere. Vestibulum ipsum turpis, dignissim at semper sit amet, pellentesque non felis.</p>
-        </div>
-        <div class="project-row" id="project-3-div">
-          <h3>project three</h3>
-          <p>Pellentesque sagittis enim ut massa venenatis, vitae lobortis sapien posuere. Vestibulum ipsum turpis, dignissim at semper sit amet, pellentesque non felis.</p>
-        </div>
       </div>
     </div>
   </body>

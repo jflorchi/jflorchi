@@ -7,6 +7,28 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>Jordan Florchinger - About</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+      (async () => {
+        const response = await fetch('/api/v1/projects/meta');
+        const resp = await response.json();
+        const projectContainer = document.getElementById("content");
+        for (var i in resp) {
+          const element = resp[i];
+          const header = document.createElement("h3");
+          const paragraph = document.createElement("p");
+
+          const div = document.createElement("div");
+          div.classList.add("project-listing");
+          div.appendChild(header);
+          div.appendChild(paragraph);
+
+          header.appendChild(document.createTextNode(element.title));
+          paragraph.appendChild(document.createTextNode(element.summary));
+
+          projectContainer.appendChild(div);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="centered" id="title">
@@ -20,9 +42,5 @@
       </ul>
     </div>
   <div id="content"></div>
-    <div class="project-listing">
-      <h3 class="project-title">project title</h3>
-      <p class="project-description">pppproject description roject description roject description roject description </p>
-    </div>
   </body>
 </html>
